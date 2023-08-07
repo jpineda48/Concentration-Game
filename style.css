@@ -1,0 +1,35 @@
+* {
+    border: 2px solid beige;
+    box-sizing: border-box;
+}
+ 
+body {
+    margin:0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background-color: beige;
+}
+.grid {
+    width: 600px;
+    height: 500px;
+    background-color: beige;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+div img {
+    width: 120px;
+    height: 160px;
+    background-color: white;
+    border:solid 2px black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
