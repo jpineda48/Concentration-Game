@@ -1,18 +1,18 @@
   
-    ///card options array
-    const cardArray = [
-        {name: 'rem2', img: 'images/rembrandt2.png'},
-        {name: 'rem2', img: 'images/rembrandt2.png'},
-        {name: 'rem1', img: 'images/rembrandt1.png'},
-        {name: 'rem1', img: 'images/rembrandt1.png'},
-        {name: 'pic1', img: 'images/picasso1.png'},
-        {name: 'pic1', img: 'images/picasso1.png'},
-        {name: 'pic3', img: 'images/picasso3.png'},
-        {name: 'pic3', img: 'images/picasso3.png'},
-        {name: 'mon2', img: 'images/mondrian2.png'},
-        {name: 'mon2', img: 'images/mondrian2.png'},
-        {name: 'mon1', img: 'images/mondrian1.png'},
-        {name: 'mon1', img: 'images/mondrian1.png'}
+     ///card options array
+     const cardArray = [
+        {name: '1', img: 'images/1.png'},
+        {name: '1', img: 'images/1.png'},
+        {name: '2', img: 'images/2.png'},
+        {name: '2', img: 'images/2.png'},
+        {name: '3', img: 'images/3.png'},
+        {name: '3', img: 'images/3.png'},
+        {name: '4', img: 'images/4.png'},
+        {name: '4', img: 'images/4.png'},
+        {name: '5', img: 'images/5.png'},
+        {name: '5', img: 'images/5.png'},
+        {name: '6', img: 'images/6.png'},
+        {name: '6', img: 'images/6.png'}
     ]
 
 
@@ -28,6 +28,7 @@ let cardsChosenId = []
 const cardsWon = []
 
 
+
 function createBoard() {
     cardArray.sort(function(){return 0.5 - Math.random()});
 
@@ -36,7 +37,7 @@ function createBoard() {
         //creates image element
         const card = document.createElement('img')
         //sets each card cover photo to coverPhoto
-        card.setAttribute('src', 'images/coverPhoto.png')
+        card.setAttribute('src', 'images/StartPhoto.png')
         //creates a data id for each card
         card.setAttribute('data-id', i)
         //each card gets event listender that flips card
@@ -49,23 +50,16 @@ function createBoard() {
 }
 
 ///check for match
-function openPopup() {
-    const button = document.querySelector('.popup')
-    button.classList.add('open-popup')
-}
 
 function checkForMatch () {
    let cards = document.querySelectorAll('img')
     const firstChoice = cardsChosenId[0]
     const secondChoice = cardsChosenId[1]
     if (cardsChosen[0]=== cardsChosen[1]){
-        
-        
-     
-        cards[firstChoice].setAttribute('src', 'images/coverPhoto.png')
-        cards[secondChoice].removeEventListener("click", flipCard)
+        cards[firstChoice].setAttribute('src', `images/${cardArray[firstChoice].name}.png`)
+        cards[firstChoice].removeEventListener("click", flipCard)
 
-        cards[firstChoice].setAttribute('src', 'images/coverPhoto.png')
+        cards[secondChoice].setAttribute('src', `images/${cardArray[secondChoice].name}.png`)
         cards[secondChoice].removeEventListener("click", flipCard)
         cardsWon.push(cardsChosen)
         // console.log("this is cards won" , cardsWon)
@@ -73,11 +67,10 @@ function checkForMatch () {
         }else {
             cards[firstChoice].setAttribute('src', 'images/coverPhoto.png')
             cards[secondChoice].setAttribute('src', 'images/coverPhoto.png')
-            alert('sorry,try again')
          }
          cardsChosen = []
          cardsChosenId = []
-         resultDisplay.textContent = cardsWon.length
+         resultDisplay.textContent = `Score ${cardsWon.length}`
          if(cardsWon.length === cardArray.length/2) {
             resultDisplay.textContent = 'CONGRATS YOU WON'
         }
@@ -103,42 +96,54 @@ function flipCard (){
     if (cardsChosen.length === 2) {
         setTimeout(checkForMatch, 500)
     }
-    timer()
+
 
 }
 
-createBoard()
 
 function startGame (){
     const startBtn = document.querySelector('button');
     startBtn.addEventListener('click', function(){
+    
         const text = document.querySelectorAll('div h3');
         for(var i=0; i<text.length; i++) {
             text[i].parentNode.removeChild(text[i]);
-        }
+           }
         const button = document.querySelector('button')
         button.remove()
-       })
+        timer()
+         })
+         
+       
+
 }
 
-function keepScore() {
 
-}
 
 function timer() {
-    const timeH = document.getElementById('timer')
-    let timeSecond = 6;
+    const timeH = document.querySelector('.timer')
+    let timeSecond = 20;
     timeH.innerHTML = `Seconds Left: ${timeSecond}`
     const countDown = setInterval(()=> {
         timeSecond--;
         timeH.innerHTML = `Seconds Left: ${timeSecond}`;
     if(timeSecond <= 0 || timeSecond < 1){
         clearInterval(countDown);
+        // const win = document.querySelector('heading')
+        // win.classList.add('.open-popup')
+        // win.textContent = 'loser'
+        
     }
+    return
+    // if (cardsChosen[0]=== cardsChosen[1]){
+    //     clearInterval(countDown)
+    // }
     },1000)
     }
 
-   
-startGame ()
 
-openPopup()
+    
+
+startGame()
+createBoard()
+console.log('this is cardImages', grid)
